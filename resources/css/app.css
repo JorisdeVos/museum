@@ -1,0 +1,13 @@
+/* Define custom colors */
+.bg-beige {
+    background-color: #f8f8f8;
+}
+
+.border-gold {
+    border-color: #b8860b;
+}
+
+/* Include Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
