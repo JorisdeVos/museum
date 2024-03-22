@@ -18,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/painting/submit', [PaintingController::class, 'submitPainting']);
+Route::post('/save-image', [PaintingController::class, 'submitPainting']);
 Route::get('/canvas', [PaintingController::class, 'showCanvas']);

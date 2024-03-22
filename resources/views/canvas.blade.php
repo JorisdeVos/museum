@@ -56,7 +56,12 @@
             [lastX, lastY] = [e.offsetX, e.offsetY];
         });
 
-        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mousemove', (e) => {
+            if (isDrawing) {
+                draw(e);
+            }
+        });
+
         canvas.addEventListener('mouseup', () => isDrawing = false);
 
         // Event listener for color buttons
@@ -68,8 +73,33 @@
 
         // Event listener for submit button
         document.getElementById('submitBtn').addEventListener('click', () => {
-            const imageData = canvas.toDataURL();
-            // Send imageData to server
+        const imageData = canvas.toDataURL();
+        // Send imageData to server
+        saveImage(imageData);
+    });
+
+    // Function to save image data to public storage
+    function saveImage(imageData) {
+        fetch('/save-image', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ image: imageData }) // Change 'imageData' to 'image'
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Image saved successfully!');
+            } else {
+                console.error('Failed to save image:', response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error('Error saving image:', error);
         });
+    }
     </script>
 @endsection
+
+
