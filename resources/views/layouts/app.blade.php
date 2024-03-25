@@ -13,7 +13,8 @@
 
     <header class="bg-gray-200 p-4 bg-base-300 text-base-content">
         <div class="navbar bg-base-100">
-            <a class="btn btn-ghost text-xl">daisyUI</a>
+            <a class="btn btn-ghost text-xl">Museum hall</a>
+            <a class="btn btn-ghost text-xl">Canvas</a>
         </div>
     </header>
 
@@ -23,7 +24,7 @@
 
     <footer class="footer footer-center p-4 bg-base-300 text-base-content">
         <aside>
-          <p>Copyright © 2024 - All right reserved by ACME Industries Ltd</p>
+          <p>Copyright © 2024 - All right reserved by Joris de Vos Ltd</p>
         </aside>
     </footer>
 

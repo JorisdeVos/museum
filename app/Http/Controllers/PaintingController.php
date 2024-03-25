@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Painting;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class PaintingController extends Controller
 {
@@ -16,9 +17,9 @@ class PaintingController extends Controller
     public function submitPainting(Request $request)
     {
         try {
-            // Validate the request if needed
+            // Validate the request
             $request->validate([
-                'image' => 'required|string' // Ensure that 'image' is present and is a string
+                'image' => 'required|string'
             ]);
 
             // Decode the base64 image data
@@ -35,15 +36,13 @@ class PaintingController extends Controller
 
             // Create a new Painting record
             Painting::create([
-                'user_id' => auth()->id(),
+                'user_id' => auth()->id(), // Will be null if user is not logged in
                 'image' => $filename,
             ]);
 
             return redirect('/')->with('success', 'Painting submitted successfully!');
         } catch (\Exception $e) {
-            // Log the exception
             \Log::error('Error submitting painting: ' . $e->getMessage());
-            // Redirect back with an error message
             return redirect()->back()->with('error', 'Failed to submit painting. Please try again.');
         }
     }

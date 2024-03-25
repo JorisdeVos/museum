@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('paintings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('image');
             $table->timestamps();
         

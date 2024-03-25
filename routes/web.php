@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaintingController;
+use App\Models\Painting;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,8 @@ use App\Http\Controllers\PaintingController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $paintings = Painting::all();
+    return view('welcome', compact('paintings'));
 });
 
 Route::post('/save-image', [PaintingController::class, 'submitPainting']);
